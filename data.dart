@@ -60,10 +60,10 @@ class _TodoDataState extends State<TodoData> {
                       : const Color.fromARGB(255, 56, 56, 56),
                 ),
               ),
-              value: todo.completed, // Accede a completed con null safety
+              value: todo.completed, 
               onChanged: (newValue) {
                 setState(() {
-                  todo.completed = newValue ?? false; // Actualiza completed con null safety
+                  todo.completed = newValue ?? false; 
                 });
               },
             ),
