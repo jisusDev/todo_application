@@ -9,13 +9,13 @@ class TodosData {
     final int userId;
     final int id;
     final String title;
-    late final bool completed;
+    bool? completed;
 
     TodosData({
         required this.userId,
         required this.id,
         required this.title,
-        required this.completed,
+        this.completed,
     });
 
     factory TodosData.fromJson(Map<String, dynamic> json) => TodosData(

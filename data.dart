@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 //import 'dart:convert';
-import 'package:todo_application/Data/todos_data.dart'; 
+
+import 'package:todo_application/Data/todos_data.dart';
 
 class TodoData extends StatefulWidget {
   const TodoData({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class TodoData extends StatefulWidget {
 }
 
 class _TodoDataState extends State<TodoData> {
-  List<TodosData> todosDataList = []; 
+  List<TodosData> todosDataList = [];
 
   @override
   void initState() {
@@ -25,7 +26,7 @@ class _TodoDataState extends State<TodoData> {
           await Dio().get('https://jsonplaceholder.typicode.com/todos');
       print('Contenido de la respuesta: ${response.data}');
       if (response.statusCode == 200) {
-        List<TodosData> jsonData = todosFromJson(response.data!); 
+        List<TodosData> jsonData = todosFromJson(response.data!);
         print('Tipo de datos recibidos: ${jsonData.runtimeType}');
         setState(() {
           todosDataList = jsonData;
@@ -54,15 +55,15 @@ class _TodoDataState extends State<TodoData> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: todo.completed
+                  color: todo.completed == true
                       ? const Color.fromARGB(255, 193, 191, 191)
                       : const Color.fromARGB(255, 56, 56, 56),
                 ),
               ),
-              value: todo.completed,
+              value: todo.completed, // Accede a completed con null safety
               onChanged: (newValue) {
                 setState(() {
-                  todo.completed = newValue ?? false;
+                  todo.completed = newValue ?? false; // Actualiza completed con null safety
                 });
               },
             ),
