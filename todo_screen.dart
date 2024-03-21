@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_application/Data/data.dart';
+import 'package:intl/intl.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({super.key});
@@ -12,68 +14,57 @@ bool? isChecked = false;
 class _TodoScreenState extends State<TodoScreen> {
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String day = DateFormat('dd').format(now);
+    String monthYear = DateFormat('MMM yyyy').format(now);
     return Padding(
       padding: const EdgeInsets.all(36.0),
       child: Column(
         children: [
-          const Row(
+          Row(
             children: [
               Text(
-                "12",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 42,
-                    color: Color.fromARGB(255, 96, 96, 96)),
+                day,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 45,
+                  color: Color.fromARGB(255, 96, 96, 96),
+                ),
               ),
-              SizedBox(
-                width: 10,
+              const SizedBox(
+                width: 7,
               ),
               Column(
                 children: [
                   Text(
-                    "JAN",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    monthYear.split(" ")[0],
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   Text(
-                    "2016",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey),
+                    monthYear.split(" ")[1],
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                        fontSize: 16),
                   ),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Text(
-                "TUESDAY",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Color.fromARGB(255, 112, 112, 112)),
+                DateFormat("EEEE").format(now),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Color.fromARGB(255, 112, 112, 112),
+                ),
               ),
             ],
           ),
-          const SizedBox(height: 20,),
-          Row(
-            children: [
-              const Text(
-                "Buy new Sweatshirt",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  color: Color.fromARGB(255, 193, 191, 191),
-                ),
-              ),
-              const Spacer(),
-              Checkbox(
-                value: isChecked,
-                activeColor: Colors.greenAccent,
-                onChanged: (value) {
-                  setState(() {
-                    isChecked = value;
-                  });
-                },
-              ),
-            ],
-          )
+          const SizedBox(
+            height: 20,
+          ),
+          const TodoData(),
         ],
       ),
     );
